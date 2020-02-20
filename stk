@@ -35,9 +35,7 @@
 ###############################################################################
 
 #   Prep area
-#usagetxt="Usage: stk <clear/watch>"
 helpfile="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/stk-helptext.txt
-echo $helpfile
 
 #   Check if there's a command in $1. If there is, go through the list of
 #   recognised commands, executing the relevant code. If the command isn't
