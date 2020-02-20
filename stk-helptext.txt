@@ -1,0 +1,19 @@
+
+                              Slurm Toolkit (stk)
+DESCRIPTION
+    A toolkit to make working with Slurm Workload Manager a little bit easier.
+    The stk script has a list of accepted commands which are entered after
+    calling the main script. These commands form the bulk of the toolkit.
+
+SYNOPSIS
+       stk <command> [<args>...]
+
+AVAILABLE COMMANDS
+    clear
+            Clears the queue of jobs which were made by the current user (as
+            defined in the $USER special variable in most shells).
+    watch
+            Clears the terminal window, and lists all commands by the current
+            user (as defined in the $USER special variable in most shells). The
+            time is also displayed at the top of the screen.
+

@@ -35,7 +35,9 @@
 ###############################################################################
 
 #   Prep area
-usagetxt="Usage: stk <clear/watch>"
+#usagetxt="Usage: stk <clear/watch>"
+helpfile="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/stk-helptext.txt
+echo $helpfile
 
 #   Check if there's a command in $1. If there is, go through the list of
 #   recognised commands, executing the relevant code. If the command isn't
@@ -44,7 +46,7 @@ if [ ! $1 ]
 then
     #   Idiotproofing in case no command given in $1
     echo "Error: No command given."
-    echo $usagetxt
+    cat $helpfile
     exit 1
 
 elif [ $1 == 'clear' ]
@@ -67,6 +69,6 @@ then
 else
     #   If the command in $1 hasn't been funneled into the if statements above
     echo "Error: Unrecognised command \"$1\"."
-    echo $usagetxt
+    cat $helpfile
     exit 2
 fi
