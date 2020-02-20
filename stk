@@ -1,0 +1,72 @@
+#!/bin/bash
+###############################################################################
+#   Copyright notice:   Copyright (c) Richard Yim, 20 Feb 2020, v1.0
+#                       All rights reserved.
+#
+#   Contributors: Richard Yim*
+#
+#  *Centre for Cancer
+#   Faculty of Medical Sciences
+#   Newcastle University
+#   UK
+#
+#   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+#   "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED 
+#   TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
+#   PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
+#   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
+#   EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
+#   PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+#   PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+#   LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+#   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS 
+#   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+#   You are free to use, distribute and/or modify this software as you wish as
+#   long as the following conditions are met:
+#   The software must retain this copyright notice.
+#   Contributors must add their names to the contributors list.
+#   Neither the name of the copyright holder nor the names of its contributors 
+#   may be used to endorse or promote products derived from this software
+#   without specific prior written permission.
+#
+#   Installation instructions are in README.md
+#
+###############################################################################
+
+#   Prep area
+usagetxt="Usage: stk <clear/watch>"
+
+#   Check if there's a command in $1. If there is, go through the list of
+#   recognised commands, executing the relevant code. If the command isn't
+#   recognised, or it isn't present, exit with helpful error text.
+if [ ! $1 ]
+then
+    #   Idiotproofing in case no command given in $1
+    echo "Error: No command given."
+    echo $usagetxt
+    exit 1
+
+elif [ $1 == 'clear' ]
+then
+    #   Search the queue for job IDs made by $USER. Feeds them into scancel
+    squeue -u $USER -h -o "%i" | xargs scancel
+
+elif [ $1 == 'watch' ]
+then
+    #   Clear the terminal, then read the queue for $USER's jobs every 2 min.
+    while true
+    do
+	    printf "\033c"
+	    echo
+	    date
+        squeue -o "%.8i %.9P %.5u %.10T %.5C %.11L %j" -u $USER
+	    sleep 120
+    done
+
+else
+    #   If the command in $1 hasn't been funneled into the if statements above
+    echo "Error: Unrecognised command \"$1\"."
+    echo $usagetxt
+    exit 2
+fi
