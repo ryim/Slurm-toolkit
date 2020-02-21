@@ -66,6 +66,7 @@ then
         echo "Error: no regex given in \$2"
         cat $helpfile
         exit 3
+    fi
 
     #   Search the queue for job IDs made by $USER.
     #   Check jobs against the Perl regex in $2, then feed them into scancel
