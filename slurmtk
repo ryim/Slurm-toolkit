@@ -51,7 +51,7 @@ then
 elif [ $1 == 'check' ]
 then
     #   Search the queue for jobs made by $USER. Print them in pretty format
-    squeue -o \"$queuestring\" -u $USER
+    squeue -o "$queuestring" -u $USER
 
 elif [ $1 == 'clear' ]
 then
@@ -80,7 +80,7 @@ then
 	    printf "\033c"
 	    echo
 	    date
-        squeue -o \"$queuestring\" -u $USER
+        squeue -o "$queuestring" -u $USER
 	    sleep 120
     done
 
