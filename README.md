@@ -18,7 +18,7 @@ For a full description of the commands in this toolkit, including a description 
 + slurmtk check
 + slurmtk clear
 + slurmtk delbyname
-+ (unfinished) slurmtk oneliner: Create a generic single-core slurm script and submit this to the default queue. The qsub script is based on the file named "sbatch1line.template". Usage: 
++ (unfinished) slurmtk oneliner: Create a generic single-core slurm script and submit this to the default queue. The script is based on the file named "sbatch1line.template". Usage: 
 ```
 slurmtk oneliner "command and arguments to pass to qsub command"
 ```

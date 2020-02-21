@@ -6,7 +6,11 @@ DESCRIPTION
     calling the main script. These commands form the bulk of the toolkit.
 
 SYNOPSIS
-       slurmtk <command> [<args>...]
+       slurmtk [options] <command> [<args>...]
+
+GLOBAL OPTIONS
+    -h, --help
+            Print this help text. Overrides all other options and commands.
 
 AVAILABLE COMMANDS
     check

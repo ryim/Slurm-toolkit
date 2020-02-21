@@ -36,7 +36,61 @@
 
 #   Prep area
 helpfile="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/stk-helptext.txt
+helpstring="Use: 'slurmtk -h' for help."
 queuestring='%.8i %.9P %.5u %.10T %.5C %.11L %j'
+
+#   Check if options parsing is possible. If not, fail with helpful text.
+! getopt --test > /dev/null 
+if [[ ${PIPESTATUS[0]} -ne 4 ]]; then
+    echo 'Error: `getopt --test` failed in this environment.'
+    exit 100
+fi
+
+################################################################################
+#                                                                              #
+#   Options parsing (Full disclosure: I'm not entirely sure how this works.
+#   Handle this section with care.)
+OPTIONS=h
+LONGOPTS=help
+! PARSED=$(getopt --options=$OPTIONS --longoptions=$LONGOPTS --name "$0" -- "$@")
+if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+    # e.g. return value is 1
+    #  then getopt has complained about wrong arguments to stdout
+    exit 2
+fi
+
+eval set -- "$PARSED"
+
+#   Set default values for options
+h=n
+
+#   Change options based on parsed inputs (I think)
+while true; do
+    case "$1" in
+        -h|--help)
+            h=y
+            shift
+            ;;
+        --)
+            shift
+            break
+            ;;
+        *)
+            echo "Programming error"
+            exit 3
+            ;;
+    esac
+done
+
+#                                                                              #
+################################################################################
+
+#   If the help file is requested, give it, and ignore anything else.
+if [ $h == "y" ]
+then
+    cat $helpfile
+    exit 0
+fi
 
 #   Check if there's a command in $1. If there is, go through the list of
 #   recognised commands, executing the relevant code. If the command isn't
@@ -45,8 +99,14 @@ if [ ! $1 ]
 then
     #   Idiotproofing in case no command given in $1
     echo "Error: No command given."
-    cat $helpfile
+    echo $helpstring
     exit 1
+
+#elif [ $1 == '-h' ] || [ $1 == '--help' ]
+#then
+#    #   Print help text if it's asked for. Yes, this is an option, but I'm
+#    #   treating it like a command because it overrides everything anyway.
+#    cat $helpfile
 
 elif [ $1 == 'check' ]
 then
@@ -63,8 +123,8 @@ then
     #   Check if there is a $2. If not, spit an error.
     if [ ! $2 ]
     then
-        echo "Error: no regex given in \$2"
-        cat $helpfile
+        echo "Error: no regex given in \$2. See help text below for usage."
+        echo $helpstring
         exit 3
     fi
 
@@ -87,6 +147,6 @@ then
 else
     #   If the command in $1 hasn't been funneled into the if statements above
     echo "Error: Unrecognised command \"$1\"."
-    cat $helpfile
+    echo $helpstring
     exit 2
 fi
