@@ -40,7 +40,7 @@ use strict;
 use FindBin;
 
 #   Locate slurm file
-(my $slurmfile = $FindBin::Bin) .= "/Slurm-scripts/md5sum.slurm";
+(my $slurmfile = $FindBin::Bin) .= "/lib/md5sum.slurm";
 
 #   Prep
 system("mkdir -p eandofiles");

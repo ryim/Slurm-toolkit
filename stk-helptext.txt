@@ -1,19 +1,32 @@
 
-                              Slurm Toolkit (stk)
+                            Slurm Toolkit (slurmtk)
 DESCRIPTION
     A toolkit to make working with Slurm Workload Manager a little bit easier.
     The stk script has a list of accepted commands which are entered after
     calling the main script. These commands form the bulk of the toolkit.
 
 SYNOPSIS
-       stk <command> [<args>...]
+       slurmtk <command> [<args>...]
 
 AVAILABLE COMMANDS
+    check
+            Lists all jobs by the current user (as defined in the $USER special
+            variable in most shells). The output is equivalent to the command:
+            squeue -o "%.8i %.9P %.5u %.10T %.5C %.11L %j" -u $USER
     clear
             Clears the queue of jobs which were made by the current user (as
             defined in the $USER special variable in most shells).
+    delbyname
+            Usage: slurmtk delbyname <'Perl-style regex'>
+            E.G.:  slurmtk delbyname 'md5sum'
+
+            Searches the queue for jobs made by $USER, and keeps the names.
+            Checks job names against a Perl-style regex, then feeds matching
+            jobs into scancel.
     watch
-            Clears the terminal window, and lists all commands by the current
-            user (as defined in the $USER special variable in most shells). The
-            time is also displayed at the top of the screen.
+            Clears the terminal window, and lists all jobs by the current
+            user (as defined in the $USER special variable in most shells). The 
+            output is the same as that of the 'check' command. The time is also
+            displayed at the top of the screen. This screen refreshes every 120
+            seconds until the user kills it with 'Ctrl+C'.
 

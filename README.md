@@ -12,11 +12,14 @@ PATH=/preferred/installation/directory/Slurm-toolkit:$PATH
 
 ## Contents
 
-+ md5sum.pl: Submits an md5sum job to the default queue. A good first script to run.
-+ stk clear: Uses the scancel command to remove all jobs in the queue, which were made by this user.
-+ (unfinished) stk delbyname: Use the qdel command to remove jobs in the queue.
-+ (unfinished) stk oneliner: Create a generic single-core slurm script and submit this to the default queue. The qsub script is based on the file named "sbatch1line.template". Usage: 
+For a full description of the commands in this toolkit, including a description of the commands, please see stk-helptext.txt.
+
++ md5sum.pl
++ slurmtk check
++ slurmtk clear
++ slurmtk delbyname
++ (unfinished) slurmtk oneliner: Create a generic single-core slurm script and submit this to the default queue. The qsub script is based on the file named "sbatch1line.template". Usage: 
 ```
-stk oneliner "command and arguments to pass to qsub command"
+slurmtk oneliner "command and arguments to pass to qsub command"
 ```
-+ stk watch: Clear the terminal and watch the queue for jobs made by this user, refreshing every 120 seconds Use "Ctrl + C" to exit.
++ slurmtk watch

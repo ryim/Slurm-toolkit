@@ -1,6 +1,6 @@
 #!/bin/bash
 ###############################################################################
-#   Copyright notice:   Copyright (c) Richard Yim, 20 Feb 2020, v1.0
+#   Copyright notice:   Copyright (c) Richard Yim, 20 Feb 2020, v0.3
 #                       All rights reserved.
 #
 #   Contributors: Richard Yim*
@@ -36,6 +36,7 @@
 
 #   Prep area
 helpfile="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/stk-helptext.txt
+queuestring='%.8i %.9P %.5u %.10T %.5C %.11L %j'
 
 #   Check if there's a command in $1. If there is, go through the list of
 #   recognised commands, executing the relevant code. If the command isn't
@@ -47,10 +48,28 @@ then
     cat $helpfile
     exit 1
 
+elif [ $1 == 'check' ]
+then
+    #   Search the queue for jobs made by $USER. Print them in pretty format
+    squeue -o \"$queuestring\" -u $USER
+
 elif [ $1 == 'clear' ]
 then
     #   Search the queue for job IDs made by $USER. Feeds them into scancel
     squeue -u $USER -h -o "%i" | xargs scancel
+
+elif [ $1 == 'delbyname' ]
+then
+    #   Check if there is a $2. If not, spit an error.
+    if [ ! $2 ]
+    then
+        echo "Error: no regex given in \$2"
+        cat $helpfile
+        exit 3
+
+    #   Search the queue for job IDs made by $USER.
+    #   Check jobs against the Perl regex in $2, then feed them into scancel
+    squeue -u $USER -h -o "%j" | perl -n -e 'print if m/$2/' | xargs scancel
 
 elif [ $1 == 'watch' ]
 then
@@ -60,7 +79,7 @@ then
 	    printf "\033c"
 	    echo
 	    date
-        squeue -o "%.8i %.9P %.5u %.10T %.5C %.11L %j" -u $USER
+        squeue -o \"$queuestring\" -u $USER
 	    sleep 120
     done
 
