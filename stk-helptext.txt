@@ -24,9 +24,17 @@ AVAILABLE COMMANDS
             Usage: slurmtk delbyname <'Perl-style regex'>
             E.G.:  slurmtk delbyname 'md5sum'
 
-            Searches the queue for jobs made by $USER, and keeps the names.
-            Checks job names against a Perl-style regex, then feeds matching
-            jobs into scancel.
+            Searches the queue for jobs made by the current user (as defined in
+            the $USER special variable in most shells). Checks job names and
+            IDs against a Perl-style regex, then feeds matching jobs into
+            scancel.
+    oneliner (in development)
+            Usage: slurmtk oneliner <"one-liner job to pass to compute nodes">
+            E.G.:  slurmtk oneliner "md5sum /etc/fstab"
+
+            Takes a command within quotes, creates a 10 minute Slurm job script,
+            and passes the script to the "short" queue. Use this with care, and
+            report any bugs to the developers.
     watch
             Clears the terminal window, and lists all jobs by the current
             user (as defined in the $USER special variable in most shells). The 

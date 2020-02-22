@@ -12,14 +12,11 @@ PATH=/preferred/installation/directory/Slurm-toolkit:$PATH
 
 ## Contents
 
-For a full description of the commands in this toolkit, including a description of the commands, please see stk-helptext.txt.
+For a full description of the commands available in the slurmtk script, please see stk-helptext.txt.
 
-+ md5sum.pl
++ md5sum.pl: A script which runs up to 20 minute md5sum jobs on compute nodes, keeping login nodes free.
 + slurmtk check
 + slurmtk clear
 + slurmtk delbyname
-+ (unfinished) slurmtk oneliner: Create a generic single-core slurm script and submit this to the default queue. The script is based on the file named "sbatch1line.template". Usage: 
-```
-slurmtk oneliner "command and arguments to pass to qsub command"
-```
++ slurmtk oneliner
 + slurmtk watch

@@ -1,0 +1,40 @@
+#!/bin/bash -l
+###############################################################################
+#                              Environment setup                              #
+
+#   Set number of cores min-max
+#SBATCH -N 1-1
+
+#   Set RAM per core
+#SBATCH --mem-per-cpu=1G
+
+#   Set mail preferences
+#SBATCH --mail-type=ALL
+
+#   Set queue in which to submit: defq bigmem short 
+#SBATCH -p short
+
+#   Set wall clock time
+#SBATCH -t 0-0:10:00
+
+#                                                                             #
+###############################################################################
+
+#   Copy version of qsub script used to current dir. for archival purposes
+scriptloc="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/`basename "$0"`
+scriptcopy=`pwd`/.`date +%Y%m%d-%H_%M_%S`_NAME_`basename "$0"`
+cp ${scriptloc} ${scriptcopy}
+
+#   Logging
+echo " HOST: "`hostname`
+echo "COMMAND"
+echo "Script file: ${scriptcopy}"
+echo "[`date +%Y%m%d_%H%M%S`] Starting"
+echo "-------------------------"
+
+#   Command
+COMMAND
+
+#   Final logging
+echo "-------------------------"
+echo "[`date +%Y%m%d_%H%M%S`] Finished"
