@@ -2,7 +2,7 @@
                             Slurm Toolkit (slurmtk)
 DESCRIPTION
     A toolkit to make working with Slurm Workload Manager a little bit easier.
-    The stk script has a list of accepted commands which are entered after
+    The slurmtk script has a list of accepted commands which are entered after
     calling the main script. These commands form the bulk of the toolkit.
 
 SYNOPSIS
@@ -40,5 +40,5 @@ AVAILABLE COMMANDS
             user (as defined in the $USER special variable in most shells). The 
             output is the same as that of the 'check' command. The time is also
             displayed at the top of the screen. This screen refreshes every 120
-            seconds until the user kills it with 'Ctrl+C'.
+            seconds until the user kills the process with 'Ctrl+C'.
 
