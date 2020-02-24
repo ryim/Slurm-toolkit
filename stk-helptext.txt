@@ -1,5 +1,8 @@
 
                             Slurm Toolkit (slurmtk)
+
+v0.4.0
+
 DESCRIPTION
     A toolkit to make working with Slurm Workload Manager a little bit easier.
     The slurmtk script has a list of accepted commands which are entered after
