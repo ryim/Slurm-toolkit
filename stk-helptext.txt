@@ -1,7 +1,7 @@
 
                             Slurm Toolkit (slurmtk)
 
-v0.4.0
+Slurm-toolkit version: 0.4.0
 
 DESCRIPTION
     A toolkit to make working with Slurm Workload Manager a little bit easier.

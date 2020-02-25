@@ -1,12 +1,10 @@
 #!/usr/bin/perl
-use warnings;
-use strict;
-use FindBin;
-my $bindir = $FindBin::Bin;
-
-###############################################################################
-#   Copyright notice:   Copyright (c) Richard Yim, 20 Feb 2020, v1.0
+################################################################################
+#                                                                              #
+#   Copyright notice:   Copyright (c) Richard Yim, 20 Feb 2020
 #                       All rights reserved.
+#
+#   Slurm-toolkit version: 0.4.0
 #
 #   Contributors: Richard Yim*
 #
@@ -27,7 +25,7 @@ my $bindir = $FindBin::Bin;
 #   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS 
 #   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-#   You are free to use, distribute and/or modify this software as you wish, as
+#   You are free to use, distribute and/or modify this software as you wish as
 #   long as the following conditions are met:
 #   The software must retain this copyright notice.
 #   Contributors must add their names to the contributors list.
@@ -36,8 +34,13 @@ my $bindir = $FindBin::Bin;
 #   without specific prior written permission.
 #
 #   Installation instructions are in README.md
-#
-###############################################################################
+#                                                                              #
+################################################################################
+
+use warnings;
+use strict;
+use FindBin;
+my $bindir = $FindBin::Bin;
 
 #   Check all files are present
 my @dependencies = (

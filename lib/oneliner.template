@@ -1,6 +1,6 @@
 #!/bin/bash -l
-###############################################################################
-#                              Environment setup                              #
+################################################################################
+#                              Environment setup                               #
 
 #   Set number of cores min-max
 #SBATCH -N 1-1
@@ -17,8 +17,8 @@
 #   Set wall clock time
 #SBATCH -t 0-0:10:00
 
-#                                                                             #
-###############################################################################
+#                                                                              #
+################################################################################
 
 #   Copy version of qsub script used to current dir. for archival purposes
 scriptloc="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/`basename "$0"`

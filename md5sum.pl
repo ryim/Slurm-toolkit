@@ -1,8 +1,10 @@
 #!/usr/bin/perl
-
-###############################################################################
-#   Copyright notice:   Copyright (c) Richard Yim, 20 Feb 2020, v1.0
+################################################################################
+#                                                                              #
+#   Copyright notice:   Copyright (c) Richard Yim, 20 Feb 2020
 #                       All rights reserved.
+#
+#   Slurm-toolkit version: 0.4.0
 #
 #   Contributors: Richard Yim*
 #
@@ -32,8 +34,8 @@
 #   without specific prior written permission.
 #
 #   Installation instructions are in README.md
-#
-###############################################################################
+#                                                                              #
+################################################################################
 
 use warnings;
 use strict;
