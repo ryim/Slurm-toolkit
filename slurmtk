@@ -4,8 +4,6 @@
 #   Copyright notice:   Copyright (c) Richard Yim, 20 Feb 2020
 #                       All rights reserved.
 #
-#   Slurm-toolkit version: 0.4.0
-#
 #   Contributors: Richard Yim*
 #
 #  *Centre for Cancer

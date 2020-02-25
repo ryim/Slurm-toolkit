@@ -1,6 +1,6 @@
 # Slurm-toolkit
 
-Slurm-toolkit version: 0.4.0
+Slurm-toolkit version: 0.4.1
 
 Small scripts and bits which make working with the Slurm Workload Manager easier
 

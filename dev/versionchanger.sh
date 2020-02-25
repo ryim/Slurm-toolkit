@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/bin/bash
 ################################################################################
 #                                                                              #
 #   Copyright notice:   Copyright (c) Richard Yim, 20 Feb 2020
@@ -35,70 +35,22 @@
 #                                                                              #
 ################################################################################
 
-use warnings;
-use strict;
-use FindBin;
-my $bindir = $FindBin::Bin;
+#   Throw an error if there is no version string in $1
+if [ ! $1 ]
+then
+    echo "Error: No new version name/number given in \$1."
+    exit 1
+fi
 
-#   Check all files are present
-my @dependencies = (
-    $bindir . "/oneliner.template"
-);
-my $missingdependencies = 0;
-foreach my $file (@dependencies) {
-    unless (-e $file) {
-        print "Fatal error: Missing dependency:\n$file\n";
-        $missingdependencies = 1;
-    }
-}
-exit(1) if $missingdependencies == 1;       # Crap out if missing files
+#   Define directory one up from this script
+oneup="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/..
+echo $oneup
 
-#   General idiotproofing
-if (!$ARGV[0]) {
-    print "Invalid input. Usage: \"qsub1line <command> [arguments]\"\n";
-    exit(1);
-} elsif ($ARGV[1]) {
-    print "Put command and its arguments in double quotes: \"\"\n";
-    exit(1);
-}
-
-#   Get local time in usable format
-my @time = localtime();
-my $year = $time[5] + 1900;                 # Year AD
-$time[4] += 1;                              # Count months from 1
-my $timestring = sprintf("$year%02d%02d_%02d%02d%02d",
-    $time[4], $time[3], $time[2], $time[1], $time[0]
-);
-
-
-#   Parse in command line
-my $command = $ARGV[0];
-(my $procname = $command) =~ s/\s.*//;      # Set a name for process
-print "Process name:\t$procname\nCommand passed:\t$command\n";
-
-#   Write qsub script so Legion people are happy
-open(IN, $bindir . "/oneliner.template");
-open(OUT, ">$bindir/.oneliner.temp")
-    or die "Script not in writeable filesystem.\n";
-foreach my $line (<IN>) {
-    $line =~ s/NAME/$procname/g;
-    $line =~ s/COMMAND/$command/g;
-    print OUT $line;
-}
-close(OUT);
-close(IN);
-
-#   Run sbatch script
-system("sbatch "
-        ."-e $procname.e$timestring "
-        ."-o $procname.o$timestring "
-        ."--job-name=$procname.$timestring "
-        ."$bindir/.oneliner.temp"
-);
-
-
-
-
-
-
+#   Find regular files in directory one up from this. 
+#   Replace instances of version numbers in these files with $replace
+echo "Files found:"
+replace=$1
+find $oneup/* -type f \
+    | tee /dev/stderr \
+    | xargs perl -i -p -e "s/(Slurm-toolkit version:) .*/\$1 $replace/g"
 
