@@ -1,8 +1,19 @@
 # Slurm-toolkit
 
-Slurm-toolkit version: 0.4.1
+Slurm-toolkit version: 0.4.2
 
 Small scripts and bits which make working with the Slurm Workload Manager easier
+
+## Contents
+
+For a full description of the commands available in the slurmtk script, please see stk-helptext.txt.
+
++ md5sum.pl: A script which runs up to 20 minute md5sum jobs on compute nodes, keeping login nodes free.
++ slurmtk check - Check the queue for your jobs
++ slurmtk clear - Clear the queue of your jobs
++ slurmtk oneliner - Submit a one-liner job to the queue
++ slurmtk searchanddel - Delete jobs that match a search key
++ slurmtk watch - Watch the queue for your jobs, refreshing every 120s
 
 ## Installation
 
@@ -31,13 +42,4 @@ This method is preferred, because updating the package to the latest version is 
     PATH=/preferred/installation/directory/Slurm-toolkit-master:$PATH
     ```
 
-## Contents
 
-For a full description of the commands available in the slurmtk script, please see stk-helptext.txt.
-
-+ md5sum.pl: A script which runs up to 20 minute md5sum jobs on compute nodes, keeping login nodes free.
-+ slurmtk check
-+ slurmtk clear
-+ slurmtk delbyname
-+ slurmtk oneliner
-+ slurmtk watch

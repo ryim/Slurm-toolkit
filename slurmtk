@@ -123,26 +123,6 @@ then
         | awk '{print $1}' \
         | xargs scancel
 
-elif [ $1 == 'delbyname' ]
-then
-    #   Check if there is a $2. If not, spit an error.
-    if [ -z "$2" ]
-    then
-        echo "Error: no regex given in \$2. See help text below for usage."
-        echo $helpstring
-        exit 3
-    fi
-
-    #   Search the queue for job names and IDs made by $USER.
-    #   Check job names/IDs against the Perl regex in $2
-    #   Feed matches' IDs into scancel
-    echo "Canceling jobs:" > /dev/stderr
-    squeue -u $USER -h -o "%i %j" \
-        | perl -n -e 'print if m/$2/' \
-        | tee /dev/stderr \
-        | awk '{print $1}' \
-        | xargs scancel
-
 elif [ $1 == 'oneliner' ]
 then
     #   Check if there's a command to pass in $2, and nothing else after it
@@ -168,6 +148,26 @@ then
         echo "Please attempt to reinstall the latest version from Github."
         echo "If error persists, please contact the devs."
     fi
+
+elif [ $1 == 'searchanddel' ]
+then
+    #   Check if there is a $2. If not, spit an error.
+    if [ -z "$2" ]
+    then
+        echo "Error: no regex given in \$2. See help text below for usage."
+        echo $helpstring
+        exit 3
+    fi
+
+    #   Search the queue for job names and IDs made by $USER.
+    #   Check job names/IDs against the Perl regex in $2
+    #   Feed matches' IDs into scancel
+    echo "Canceling jobs:" > /dev/stderr
+    squeue -u $USER -h -o "%i %j" \
+        | perl -n -e 'print if m/$2/' \
+        | tee /dev/stderr \
+        | awk '{print $1}' \
+        | xargs scancel
 
 elif [ $1 == 'watch' ]
 then
@@ -195,7 +195,7 @@ fi
 #   1   No primary command in $1
 #   2   Unrecognised primary command in $1
 #   3   Missing value in $2
-#   4   Unexpected value in $3 (under delbyname)
+#   4   Unexpected value in $3 (under searchanddel)
 #   100 Version of getopt in environment not compatible with this script
 #   101 I don't know what this does, but there's an exit status associated
 #   102 Unrecognised arguments in the getopt section
