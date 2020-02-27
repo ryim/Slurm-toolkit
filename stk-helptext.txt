@@ -1,7 +1,7 @@
 
                             Slurm Toolkit (slurmtk)
 
-Slurm-toolkit version: 0.4.2
+Slurm-toolkit version: 0.4.3
 
 DESCRIPTION
     A toolkit to make working with Slurm Workload Manager a little bit easier.
@@ -19,7 +19,7 @@ AVAILABLE COMMANDS
     check
             Lists all jobs by the current user (as defined in the $USER special
             variable in most shells). The output is equivalent to the command:
-            squeue -o "%.8i %.9P %.5u %.10T %.5C %.11L %j" -u $USER
+            squeue -o "%.8i %.9P %.8u %.2t %.5C %.11L %j" -u $USER
     clear
             Clears the queue of jobs which were made by the current user (as
             defined in the $USER special variable in most shells).

@@ -1,6 +1,6 @@
 # Slurm-toolkit
 
-Slurm-toolkit version: 0.4.2
+Slurm-toolkit version: 0.4.3
 
 Small scripts and bits which make working with the Slurm Workload Manager easier
 
@@ -42,4 +42,9 @@ This method is preferred, because updating the package to the latest version is 
     PATH=/preferred/installation/directory/Slurm-toolkit-master:$PATH
     ```
 
+## Copyright
+
+This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
