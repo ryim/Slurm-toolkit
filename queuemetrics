@@ -1,0 +1,46 @@
+#!/bin/bash
+################################################################################
+#                                                                              #
+#   Copyright:
+#   This Source Code Form is subject to the terms of the Mozilla Public
+#   License, v. 2.0. If a copy of the MPL was not distributed with this
+#   file, You can obtain one at https://mozilla.org/MPL/2.0/.
+#
+#   Contributors: Richard Yim*
+#
+#  *Centre for Cancer
+#   Faculty of Medical Sciences
+#   Newcastle University
+#   UK
+#
+#   Installation instructions are in README.md
+#                                                                              #
+################################################################################
+
+#   Check for output file. If not given, ask for one.
+if [ ! $1 ]
+then
+    echo "Error: No output file given."
+    echo "Usage: queuemetrics <output_file.tsv>"
+    exit 1
+fi
+
+#   Run command once an hour, forever
+while true
+do
+    #   Print time, in various formats, in first column 
+    echo -en `date +\(%Y%m%d_%H%M%S\)\[%a\]\{%s\}` "\t" >> $1
+
+    #   Get metrics from a single pass of squeue
+    squeue \
+        -o '%u %C %l' \
+        -h \
+        | awk '{OFS="\t"}; {a[$1] += $2}; 
+            {sum += $2}; 
+            {time += $3}; 
+            END {print sum, length(a), NR}' \
+        >> $1
+
+    #   Sleep for an hour
+    sleep 1h
+done

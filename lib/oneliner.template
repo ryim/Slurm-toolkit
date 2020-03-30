@@ -22,8 +22,8 @@
 ################################################################################
 #                              Environment setup                               #
 
-#   Set number of cores min-max
-#SBATCH -N 1-1
+#   Set number of cores
+#SBATCH -n 1
 
 #   Set RAM per core
 #SBATCH --mem-per-cpu=1G

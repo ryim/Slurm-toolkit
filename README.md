@@ -9,6 +9,7 @@ Small scripts and bits which make working with the Slurm Workload Manager easier
 For a full description of the commands available in the slurmtk script, please see stk-helptext.txt.
 
 + md5sum.pl: A script which runs up to 20 minute md5sum jobs on compute nodes, keeping login nodes free.
++ queuemetrics - A data logger for the queue
 + slurmtk check - Check the queue for your jobs
 + slurmtk clear - Clear the queue of your jobs
 + slurmtk oneliner - Submit a one-liner job to the queue
@@ -41,6 +42,12 @@ This method is preferred, because updating the package to the latest version is 
     ```
     PATH=/preferred/installation/directory/Slurm-toolkit-master:$PATH
     ```
+## queuemetrics
+This is a script for monitoring the queue.
+It prints the current time and date (in a number of handy formats), then prints the total number of CPUs requested by all jobs in the queue, the number of users, and the total number of jobs.
+Since everyone seems to request 2 days for each job, the total time requested is proportional to the number of jobs, and is not an accurate measure of how long a job will be waiting in the queue.
+The output file of this script is a handy TSV, which can be graphed by R, Excel, Octave, or your favourite numerical processing package.
+It is recommended to run this script in a `screen` shell, so that you can detach the shell and leave it running in the background.
 
 ## Copyright
 
