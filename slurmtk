@@ -20,7 +20,7 @@
 #   Prep area
 helpfile="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/stk-helptext.txt
 helpstring="Use: 'slurmtk -h' for help."
-queuestring='%.8i %.9P %.8u %.2t %.5C %.5b %.11L %j'
+queuestring='%.8i %.9P %.8u %.2t %.5C %.6b %.11L %j'
 
 #   Check if options parsing is possible. If not, fail with helpful text.
 ! getopt --test > /dev/null 
