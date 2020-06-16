@@ -44,7 +44,7 @@
 
 scriptloc="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/`basename "$0"`
 scriptcopy="`pwd`/.`date +%Y%m%d-%H_%M_%S`"
-scriptcopy+="_NAME_`basename "$0"`_$(( RANDOM % 1000000 ))"
+scriptcopy+="_NAME_`basename "$0"`_PASSEDRANDOMNUMBER"
 cp ${scriptloc} ${scriptcopy}
 
 #   Logging

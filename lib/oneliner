@@ -52,6 +52,8 @@ my $timestring = sprintf("$year%02d%02d_%02d%02d%02d",
     $time[4], $time[3], $time[2], $time[1], $time[0]
 );
 
+#   Make a random number
+my $randomnum = int(rand(100000));
 
 #   Parse in command line
 my $command = $ARGV[0];
@@ -65,6 +67,7 @@ open(OUT, ">$bindir/.oneliner.temp")
 foreach my $line (<IN>) {
     $line =~ s/NAME/$procname/g;
     $line =~ s/COMMAND/$command/g;
+    $line =~ s/PASSEDRANDOMNUMBER/$randomnum/g;
     print OUT $line;
 }
 close(OUT);
@@ -72,9 +75,9 @@ close(IN);
 
 #   Run sbatch script
 system("sbatch "
-        ."-e $procname.e$timestring "
-        ."-o $procname.o$timestring "
-        ."--job-name=$procname.$timestring "
+        ."-e $procname.e${timestring}_$randomnum "
+        ."-o $procname.o${timestring}_$randomnum "
+        ."--job-name=$procname.${timestring}_$randomnum "
         ."$bindir/.oneliner.temp"
 );
 
