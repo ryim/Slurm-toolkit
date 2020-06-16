@@ -37,7 +37,7 @@ exit(1) if $missingdependencies == 1;       # Crap out if missing files
 
 #   General idiotproofing
 if (!$ARGV[0]) {
-    print "Invalid input. Usage: \"qsub1line <command> [arguments]\"\n";
+    print "Invalid input.\n";
     exit(1);
 } elsif ($ARGV[1]) {
     print "Put command and its arguments in double quotes: \"\"\n";
@@ -58,7 +58,7 @@ my $command = $ARGV[0];
 (my $procname = $command) =~ s/\s.*//;      # Set a name for process
 print "Process name:\t$procname\nCommand passed:\t$command\n";
 
-#   Write qsub script so Legion people are happy
+#   Write Slurm script
 open(IN, $bindir . "/oneliner.template");
 open(OUT, ">$bindir/.oneliner.temp")
     or die "Script not in writeable filesystem.\n";

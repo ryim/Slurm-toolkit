@@ -1,7 +1,7 @@
 
                             Slurm Toolkit (slurmtk)
 
-Slurm-toolkit version: 0.4.3
+Slurm-toolkit version: 0.4.4
 
 DESCRIPTION
     A toolkit to make working with Slurm Workload Manager a little bit easier.
@@ -35,8 +35,8 @@ AVAILABLE COMMANDS
             Usage: slurmtk oneliner <"one-liner job to pass to compute nodes">
             E.G.:  slurmtk oneliner "md5sum /etc/fstab"
 
-            Takes a command within quotes, creates a 10 minute Slurm job script,
-            and passes the script to the "short" queue. Use this with care, and
+            Takes a command within quotes, creates a 1 hour Slurm job script,
+            and passes the script to the "defq" queue. Use this with care, and
             report any bugs to the developers.
     watch
             Clears the terminal window, and lists all jobs by the current
