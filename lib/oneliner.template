@@ -40,6 +40,31 @@
 #                                                                              #
 ################################################################################
 
+################################################################################
+#                                   Utilities                                  #
+
+#   Set up error checking
+# Stop on any error
+set -e
+# Stop on an error inside a pipeline
+set -o pipefail
+# Throw an error on calling an unassigned variable
+set -u
+
+#   Define time converter from seconds to h:m:s
+convertsecs() {
+    ((h=${1}/3600))
+    ((m=(${1}%3600)/60))
+    ((s=${1}%60))
+    printf "%02d:%02d:%02d\n" $h $m $s
+}
+
+#   Record start time
+realstarttime=$SECONDS
+
+#                                                                              #
+################################################################################
+
 #   Copy version of qsub script used to current dir. for archival purposes
 
 scriptloc="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/`basename "$0"`
@@ -58,5 +83,7 @@ echo "-------------------------"
 COMMAND
 
 #   Final logging
+dur=($SECONDS - $realstarttime)
+dur=$(convertsecs $dur)
 echo "-------------------------"
-echo "[`date +%Y%m%d_%H%M%S`] Finished"
+echo "$SLURM_JOBID [`date +%Y%m%d_%H%M%S`] Finished. Duration: $dur"
