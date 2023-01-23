@@ -18,6 +18,14 @@ For a full description of the commands available in the slurmtk script, please s
 
 ## Installation
 
+### Dependencies
+Slurmtk is designed to work on Bash with minimal dependencies.
+The `oneliner` command is written in Perl, and is designed to use the default Perl installation that is provided by the latest Ubuntu distribution.
+Just in case you don't have Perl installed, or don't have a normal Linux distro, the following Perl modules are needed to use `oneliner`:
+
++ Digest::MD5
++ FindBin
+
 ### Using "git clone" (Preferred)
 This method is preferred, because updating the package to the latest version is a simple matter of navigating to the Slurm-toolkit directory, and using the command `git pull`.
 
