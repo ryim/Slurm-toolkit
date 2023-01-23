@@ -62,6 +62,7 @@ print "Process name:\t$procname\nCommand passed:\t$command\n";
 #   Make a random number and add it to the MD5sum of the command
 my $randomnum = int(rand(100000));
 $randomnum = $randomnum . md5_base64($command);
+$randomnum =~ s/\W/_/g;
 
 #   Write Slurm script
 open(IN, $bindir . "/oneliner.template");
