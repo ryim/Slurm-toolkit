@@ -19,6 +19,7 @@
 
 use warnings;
 use strict;
+use Digest::MD5 qw(md5_base64);
 use FindBin;
 my $bindir = $FindBin::Bin;
 
@@ -52,12 +53,14 @@ my $timestring = sprintf("$year%02d%02d_%02d%02d%02d",
     $time[4], $time[3], $time[2], $time[1], $time[0]
 );
 
-#   Make a random number
+#   Make a random number and add it to the MD5sum of the command
 my $randomnum = int(rand(100000));
+$randomnum = $randomnum . md5_base64($command);
 
 #   Parse in command line
 my $command = $ARGV[0];
 (my $procname = $command) =~ s/\s.*//;      # Set a name for process
+$procname =~ s/\W/_/g;
 print "Process name:\t$procname\nCommand passed:\t$command\n";
 
 #   Write Slurm script
