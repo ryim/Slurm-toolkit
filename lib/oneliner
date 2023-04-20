@@ -19,7 +19,7 @@
 
 use warnings;
 use strict;
-use Digest::MD5 qw(md5_base64);
+use Digest::MD5 qw(md5_hex);
 use FindBin;
 my $bindir = $FindBin::Bin;
 
@@ -61,7 +61,7 @@ print "Process name:\t$procname\nCommand passed:\t$command\n";
 
 #   Make a random number and add it to the MD5sum of the command
 my $randomnum = int(rand(100000));
-$randomnum = $randomnum . md5_base64($command);
+$randomnum = $randomnum . md5_hex($command);
 $randomnum =~ s/\W/_/g;
 
 #   Write Slurm script
